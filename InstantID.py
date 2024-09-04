@@ -287,7 +287,9 @@ class ApplyInstantID:
 
         face_embed = extractFeatures(insightface, image)
         if face_embed is None:
-            raise Exception('Reference Image: No face detected.')
+            # raise Exception('Reference Image: No face detected.')
+            print(f"\033[33mWARNING: no face detected, unable to extract the embeddings!\033[0m")
+            return model, positive, negative
 
         # if no keypoints image is provided, use the image itself (only the first one in the batch)
         face_kps = extractFeatures(insightface, image_kps if image_kps is not None else image[0].unsqueeze(0), extract_kps=True)
